@@ -296,30 +296,33 @@
                 padding: 12px 16px;
                 gap: 10px;
             }
-            header > .header-item { flex: 0 0 auto; width: 100%; justify-content: center; }
-            .header-left { justify-content: center; }
-            .header-right { justify-content: center; }
             .main-title {
                 font-size: 1.3rem;
                 order: -1;
                 width: 100%;
                 text-align: center;
             }
+            header > .header-item {
+                flex: 0 0 auto;
+                width: 100%;
+                display: flex;
+                justify-content: center !important;
+                align-items: center;
+            }
+            .header-left { justify-content: center !important; }
+            .header-right { justify-content: center !important; }
             .bracket-box { padding: 6px; }
             .logo-text { font-size: 0.75rem; }
 
             main { padding: 20px 12px; }
 
-            .gallery {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
+            .gallery { grid-template-columns: 1fr 1fr; gap: 8px; }
             .gallery-container { max-width: 100%; }
 
-            .city-nav-wrapper { gap: 12px; }
-            .city-nav-btn { width: 50px; }
-            .city-nav-arrow { font-size: 1.5rem; }
-            .city-nav-label { font-size: 0.55rem; }
+            .city-nav-wrapper { gap: 8px; }
+            .city-nav-btn { width: 40px; }
+            .city-nav-arrow { font-size: 1.3rem; }
+            .city-nav-label { font-size: 0.5rem; }
 
             #cityName { font-size: 1.2rem !important; margin-bottom: 16px !important; }
 
