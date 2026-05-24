@@ -161,8 +161,105 @@
         .home-container { display: flex; flex-direction: column; align-items: center; }
         .home-container.hidden { display: none !important; }
         .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; justify-items: center; }
-        .gallery img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border: 7.5px solid var(--frame-color); box-sizing: border-box; }
+        .gallery img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border: 7.5px solid var(--frame-color); box-sizing: border-box; cursor: zoom-in; }
         
+        #lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.85);
+            align-items: center;
+            justify-content: center;
+        }
+        #lightbox.active { display: flex; }
+        #lightbox-img {
+            max-width: min(90vw, 90vh);
+            max-height: min(90vw, 90vh);
+            width: auto;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border: 7.5px solid var(--frame-color);
+            box-sizing: border-box;
+            display: block;
+        }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 20px;
+            line-height: 1;
+            transition: color 0.2s;
+            user-select: none;
+        }
+        .lightbox-nav:hover { color: rgba(255, 255, 255, 0.95); }
+        #lightbox-prev { left: 10px; }
+        #lightbox-next { right: 10px; }
+        #lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.5rem;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        #lightbox-close:hover { color: rgba(255, 255, 255, 0.95); }
+        #lightbox-counter {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.35);
+            text-transform: lowercase;
+            letter-spacing: 0.05em;
+        }
+
+        .city-nav-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+        .city-nav-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            color: var(--text-color);
+            opacity: 0.35;
+            transition: opacity 0.2s;
+            width: 80px;
+        }
+        .city-nav-btn:hover { opacity: 0.85; }
+        .city-nav-btn.invisible { visibility: hidden; }
+        .city-nav-arrow {
+            font-size: 2rem;
+            line-height: 1;
+            color: var(--secondary-text);
+        }
+        .city-nav-label {
+            font-size: 0.6rem;
+            text-transform: lowercase;
+            color: var(--secondary-text);
+            line-height: 1.3;
+            text-align: center;
+        }
+
         .hidden { display: none !important; }
 
         .home-title-row {
@@ -300,7 +397,17 @@
         </div>
         <div id="cityView" class="gallery-container hidden">
             <h2 id="cityName" style="font-weight: 300; font-size: 1.8rem; text-transform: lowercase; margin-bottom: 30px;">stadtname</h2>
-            <div id="gallery" class="gallery"></div>
+            <div class="city-nav-wrapper">
+                <button class="city-nav-btn" id="cityNavPrev" onclick="navigateCity(-1)">
+                    <span class="city-nav-arrow">‹</span>
+                    <span class="city-nav-label" id="cityNavPrevLabel"></span>
+                </button>
+                <div id="gallery" class="gallery"></div>
+                <button class="city-nav-btn" id="cityNavNext" onclick="navigateCity(1)">
+                    <span class="city-nav-arrow">›</span>
+                    <span class="city-nav-label" id="cityNavNextLabel"></span>
+                </button>
+            </div>
         </div>
     </main>
 
@@ -311,6 +418,15 @@
         </div>
         <div class="footer-right">this web presence is for personal and family purposes only</div>
     </footer>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox">
+        <button id="lightbox-close" onclick="closeLightbox()">✕</button>
+        <button class="lightbox-nav" id="lightbox-prev" onclick="lightboxNav(-1)">‹</button>
+        <img id="lightbox-img" src="" alt="">
+        <button class="lightbox-nav" id="lightbox-next" onclick="lightboxNav(1)">›</button>
+        <div id="lightbox-counter"></div>
+    </div>
 
     <script>
         const rawCityData = [
@@ -524,13 +640,92 @@
                 const city = cities.find(c => c.id === cityId);
                 cityName.innerText = city.name;
                 gallery.innerHTML = '';
-                city.images.forEach(url => {
+                city.images.forEach((url, index) => {
                     const img = document.createElement('img');
                     img.src = url; img.alt = city.name;
+                    img.onclick = () => openLightbox(city.images, index);
                     gallery.appendChild(img);
                 });
+                updateCityNav(cityId);
             }
         }
+
+        function getSortedCities() {
+            return [...cities].sort((a, b) => {
+                if (currentSort === 'country') {
+                    const cmp = a.country.localeCompare(b.country);
+                    return cmp !== 0 ? cmp : a.city.localeCompare(b.city);
+                }
+                return a.city.localeCompare(b.city);
+            });
+        }
+
+        function updateCityNav(cityId) {
+            const sorted = getSortedCities();
+            const idx = sorted.findIndex(c => c.id === cityId);
+            const prevBtn = document.getElementById('cityNavPrev');
+            const nextBtn = document.getElementById('cityNavNext');
+            const prevLabel = document.getElementById('cityNavPrevLabel');
+            const nextLabel = document.getElementById('cityNavNextLabel');
+            if (idx > 0) {
+                const prev = sorted[idx - 1];
+                prevBtn.classList.remove('invisible');
+                prevLabel.innerHTML = currentSort === 'country' ? prev.country + '<br>' + prev.city : prev.city + '<br>' + prev.country;
+            } else { prevBtn.classList.add('invisible'); }
+            if (idx < sorted.length - 1) {
+                const next = sorted[idx + 1];
+                nextBtn.classList.remove('invisible');
+                nextLabel.innerHTML = currentSort === 'country' ? next.country + '<br>' + next.city : next.city + '<br>' + next.country;
+            } else { nextBtn.classList.add('invisible'); }
+        }
+
+        function navigateCity(dir) {
+            const sorted = getSortedCities();
+            const idx = sorted.findIndex(c => c.id === currentCity);
+            const newIdx = idx + dir;
+            if (newIdx >= 0 && newIdx < sorted.length) {
+                const newCity = sorted[newIdx];
+                document.getElementById('citySelect').value = newCity.id;
+                document.getElementById('selectLabel').innerText = newCity.name;
+                loadCity(newCity.id);
+            }
+        }
+
+        let lbImages = [];
+        let lbIndex = 0;
+
+        function openLightbox(images, index) {
+            lbImages = images;
+            lbIndex = index;
+            updateLightbox();
+            document.getElementById('lightbox').classList.add('active');
+            document.addEventListener('keydown', lightboxKeyHandler);
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.removeEventListener('keydown', lightboxKeyHandler);
+        }
+
+        function lightboxNav(dir) {
+            lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
+            updateLightbox();
+        }
+
+        function updateLightbox() {
+            document.getElementById('lightbox-img').src = lbImages[lbIndex];
+            document.getElementById('lightbox-counter').innerText = `${lbIndex + 1} / ${lbImages.length}`;
+        }
+
+        function lightboxKeyHandler(e) {
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') lightboxNav(-1);
+            if (e.key === 'ArrowRight') lightboxNav(1);
+        }
+
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) closeLightbox();
+        });
     </script>
 </body>
 </html>
