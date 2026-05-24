@@ -158,6 +158,8 @@
         .main-visual::after { content: ""; position: absolute; left: 50%; top: 0; width: 2px; height: 100%; background: var(--line-color); transform: translateX(-50%); }
 
         .gallery-container { width: 100%; max-width: 875px; text-align: center; }
+        .home-container { display: flex; flex-direction: column; align-items: center; }
+        .home-container.hidden { display: none !important; }
         .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; justify-items: center; }
         .gallery img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border: 7.5px solid var(--frame-color); box-sizing: border-box; }
         
@@ -284,7 +286,7 @@
     </header>
 
     <main>
-        <div id="homeContainer" class="gallery-container" style="display: flex; flex-direction: column; align-items: center;">
+        <div id="homeContainer" class="gallery-container home-container">
             <div class="home-title-row">
                 <h2 style="font-weight: 300; font-size: 1.8rem; text-transform: lowercase; margin: 0;">random.picture</h2>
                 <div class="interval-control">
