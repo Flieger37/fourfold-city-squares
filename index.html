@@ -351,6 +351,64 @@
             transition: all 0.2s;
         }
         #themeToggle:hover { opacity: 0.7; }
+
+        @media (max-width: 600px) {
+            header {
+                flex-wrap: wrap;
+                padding: 12px 16px;
+                gap: 6px;
+                align-items: center;
+            }
+            .main-title {
+                order: 3;
+                width: 100%;
+                font-size: 1.4rem;
+                text-align: center;
+                margin: 0;
+            }
+            .header-item.header-left {
+                order: 1;
+                flex: 1;
+                justify-content: flex-start;
+            }
+            .header-item.header-right {
+                order: 2;
+                flex: 1;
+                justify-content: flex-end;
+            }
+            .bracket-box { padding: 6px; }
+            .logo-text { font-size: 0.72rem; }
+            .sort-label { display: none; }
+            .select-label, #citySelect { font-size: 0.78rem; }
+
+            main { padding: 20px 12px; }
+
+            .main-visual {
+                width: calc(100vw - 24px);
+                max-width: calc(100vw - 24px);
+                max-height: none;
+                height: calc(100vw - 24px);
+            }
+
+            .gallery { gap: 8px; }
+
+            .city-nav-btn { width: 40px; }
+            .city-nav-label { display: none; }
+            .city-nav-arrow { font-size: 1.6rem; }
+
+            .home-title-row {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 8px;
+                padding: 16px;
+                text-align: center;
+            }
+            footer > div { text-align: center !important; }
+        }
     </style>
 </head>
 <body onload="initTheme()">
