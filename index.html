@@ -368,21 +368,21 @@
             }
             .header-item.header-left {
                 order: 1;
-                flex: 0 0 auto;
-                max-width: 45%;
+                flex: 0 0 calc(50% - 6px);
+                overflow: hidden;
             }
             .header-item.header-right {
                 order: 2;
-                flex: 0 0 auto;
-                max-width: 45%;
-                margin-left: auto;
+                flex: 0 0 calc(50% - 6px);
+                justify-content: flex-end;
+                overflow: hidden;
             }
-            .bracket-box { padding: 5px; }
-            .logo-text { font-size: 0.68rem; }
+            .bracket-box { padding: 5px; max-width: 100%; }
+            .logo-text { font-size: 0.65rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
             .sort-label { display: none; }
             .sort-toggle { gap: 3px; }
             .sort-btn { font-size: 0.6rem; }
-            .select-label { font-size: 0.75rem; }
+            .select-label { font-size: 0.72rem; }
             .arrow { font-size: 1rem; }
 
             main { padding: 20px 12px; }
