@@ -48,20 +48,17 @@
         header > .header-item { flex: 1; display: flex; align-items: stretch; overflow: visible; }
         .header-left { min-width: 0; }
         .header-right { min-width: 0; justify-content: flex-end; }
-        .bracket-box { display: flex; align-items: center; justify-content: center; }
-        .bracket-inner { display: flex; align-items: center; justify-content: center; position: relative; margin: -10px; padding: 10px; }
+        .bracket-box { display: inline-flex; align-items: center; justify-content: center; position: relative; padding: 10px; }
+        .bracket-inner { display: flex; align-items: center; justify-content: center; }
         .header-left { justify-content: flex-start; }
         .header-right { justify-content: flex-end; }
 
-        /* BRACKETS */
-        .bracket-box { position: relative; padding: 10px; border-radius: 6px; }
-        .bracket-box::before, .bracket-box::after, .bracket-inner::before, .bracket-inner::after {
-            content: ""; position: absolute; width: 6px; height: 6px; border-color: var(--text-color); border-style: solid;
-        }
-        .bracket-box::before { top: 0; left: 0; border-width: 1px 0 0 1px; border-top-left-radius: 6px;}
-        .bracket-box::after { top: 0; right: 0; border-width: 1px 1px 0 0; border-top-right-radius: 6px;}
-        .bracket-inner::before { bottom: 0; left: 0; border-width: 0 0 1px 1px; border-bottom-left-radius: 6px;}
-        .bracket-inner::after { bottom: 0; right: 0; border-width: 0 1px 1px 0; border-bottom-right-radius: 6px;}
+        /* BRACKETS - 4 corner spans */
+        .bc { position: absolute; width: 7px; height: 7px; border-color: var(--text-color); border-style: solid; }
+        .bc-tl { top: 0; left: 0;  border-width: 1px 0 0 1px; border-top-left-radius: 4px; }
+        .bc-tr { top: 0; right: 0; border-width: 1px 1px 0 0; border-top-right-radius: 4px; }
+        .bc-bl { bottom: 0; left: 0;  border-width: 0 0 1px 1px; border-bottom-left-radius: 4px; }
+        .bc-br { bottom: 0; right: 0; border-width: 0 1px 1px 0; border-bottom-right-radius: 4px; }
 
         .logo-text { font-size: 0.9rem; line-height: 1.1; text-transform: lowercase; }
 
@@ -419,13 +416,20 @@
 
     <header>
         <div class="header-item header-left">
-            <div class="bracket-box"><div class="bracket-inner">
-                <div class="logo-text">photos by<br>martin pollehn</div>
-            </div></div>
+            <div class="bracket-box">
+                <span class="bc bc-tl"></span><span class="bc bc-tr"></span>
+                <span class="bc bc-bl"></span><span class="bc bc-br"></span>
+                <div class="bracket-inner">
+                    <div class="logo-text">photos by<br>martin pollehn</div>
+                </div>
+            </div>
         </div>
         <h1 class="main-title">fourfold city squares</h1>
         <div class="header-item header-right">
-            <div class="bracket-box"><div class="bracket-inner">
+            <div class="bracket-box">
+                <span class="bc bc-tl"></span><span class="bc bc-tr"></span>
+                <span class="bc bc-bl"></span><span class="bc bc-br"></span>
+                <div class="bracket-inner">
                 <div class="select-wrapper">
                     <div class="sort-toggle">
                         <span class="sort-label">sort by:</span>
