@@ -355,31 +355,35 @@
         @media (max-width: 600px) {
             header {
                 flex-wrap: wrap;
-                padding: 12px 16px;
+                padding: 10px 12px;
                 gap: 6px;
-                align-items: center;
+                align-items: flex-start;
             }
             .main-title {
                 order: 3;
                 width: 100%;
-                font-size: 1.4rem;
+                font-size: 1.3rem;
                 text-align: center;
-                margin: 0;
+                margin: 4px 0 0 0;
             }
             .header-item.header-left {
                 order: 1;
-                flex: 1;
-                justify-content: flex-start;
+                flex: 0 0 auto;
+                max-width: 45%;
             }
             .header-item.header-right {
                 order: 2;
-                flex: 1;
-                justify-content: flex-end;
+                flex: 0 0 auto;
+                max-width: 45%;
+                margin-left: auto;
             }
-            .bracket-box { padding: 6px; }
-            .logo-text { font-size: 0.72rem; }
+            .bracket-box { padding: 5px; }
+            .logo-text { font-size: 0.68rem; }
             .sort-label { display: none; }
-            .select-label, #citySelect { font-size: 0.78rem; }
+            .sort-toggle { gap: 3px; }
+            .sort-btn { font-size: 0.6rem; }
+            .select-label { font-size: 0.75rem; }
+            .arrow { font-size: 1rem; }
 
             main { padding: 20px 12px; }
 
@@ -486,56 +490,9 @@
         <div id="lightbox-counter"></div>
     </div>
 
+    <script src="cities.js"></script>
     <script>
-        const rawCityData = [
-            ["antwerp", "belgium"],
-            ["athens", "greece"],
-            ["basseterre", "saint kitts and nevis"],
-            ["bergen", "norway"],
-            ["berlin", "germany"],
-            ["boston", "usa"],
-            ["brussels", "belgium"],
-            ["budapest", "hungary"],
-            ["calico", "usa"],
-            ["cartagena", "colombia"],
-            ["colon", "panama"],
-            ["copenhagen", "denmark"],
-            ["corfu town", "greece"],
-            ["fort-de-france", "martinique"],
-            ["gdansk", "poland"],
-            ["genova", "italy"],
-            ["george town", "cayman islands"],
-            ["hamburg", "germany"],
-            ["helsinki", "finland"],
-            ["kotor", "montenegro"],
-            ["las vegas", "usa"],
-            ["london", "england"],
-            ["los angeles", "usa"],
-            ["luxembourg", "luxembourg"],
-            ["lyon", "france"],
-            ["malmo", "sweden"],
-            ["milan", "italy"],
-            ["monte-carlo", "monaco"],
-            ["new york", "usa"],
-            ["oslo", "norway"],
-            ["panama city", "panama"],
-            ["paris", "france"],
-            ["porto", "portugal"],
-            ["prague", "czechia"],
-            ["rome", "italy"],
-            ["rotterdam", "netherlands"],
-            ["rovaniemi", "finland"],
-            ["saint john's", "antigua and barbuda"],
-            ["saint petersburg", "russia"],
-            ["san francisco", "usa"],
-            ["san marino city", "san marino"],
-            ["santo domingo", "dominican republic"],
-            ["stockholm", "sweden"],
-            ["strasbourg", "france"],
-            ["tallinn", "estonia"],
-            ["the hague", "netherlands"],
-            ["valletta", "malta"]
-        ];
+        // Städteliste wird aus cities.js geladen
 
         function generateCityObjects(data) {
             return data.map(item => {
