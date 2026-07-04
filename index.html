@@ -149,8 +149,8 @@
         /* 3. CONTENT */
         main { flex: 1; display: flex; justify-content: center; align-items: center; padding: 40px 20px; }
         .main-visual { 
-            position: relative; width: 562.5px; height: 562.5px; 
-            max-width: 80vw; max-height: 70vh; aspect-ratio: 1 / 1;
+            position: relative; width: min(562.5px, 80vw, 70vh); height: min(562.5px, 80vw, 70vh); 
+            max-width: min(80vw, 70vh); max-height: min(80vw, 70vh); aspect-ratio: 1 / 1;
             border: 7.5px solid var(--frame-color); background-size: cover; background-position: center;
             background-image: url('bilder/mein-hauptbild.jpg'); 
         }
@@ -160,8 +160,8 @@
         .gallery-container { width: 100%; max-width: 875px; text-align: center; }
         .home-container { display: flex; flex-direction: column; align-items: center; }
         .home-container.hidden { display: none !important; }
-        .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; justify-items: center; }
-        .gallery img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border: 7.5px solid var(--frame-color); box-sizing: border-box; cursor: zoom-in; }
+        .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex: 1; min-width: 0; }
+        .gallery img { width: 100%; height: 100%; aspect-ratio: 1 / 1; object-fit: cover; border: 7.5px solid var(--frame-color); box-sizing: border-box; cursor: zoom-in; display: block; }
         
         #lightbox {
             display: none;
@@ -395,6 +395,21 @@
             }
 
             .gallery { gap: 8px; }
+
+            .city-nav-wrapper {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .city-nav-btn {
+                flex-direction: row;
+                width: auto;
+                gap: 8px;
+            }
+            .city-nav-btn#cityNavPrev { order: 1; }
+            #gallery { order: 2; }
+            .city-nav-btn#cityNavNext { order: 3; }
+            .city-nav-arrow { font-size: 1.4rem; }
+            .city-nav-label { display: block; font-size: 0.65rem; }
 
             .city-nav-btn { width: 40px; }
             .city-nav-label { display: none; }
