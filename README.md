@@ -21,6 +21,8 @@ you can access fourfold-city-squares via www.pollehn.de (clicking on the photo r
 
 in the top right corner, you can filter the selection by cities or countries, or select "home" to start displaying photos in random mode, which is also the default starting view of the page.
 
-at the bottom center, you can toggle between dark and light mode. when in random mode, you can select the image display duration directly above the photo. clicking on any of the small square photos enlarges them.
+at the bottom center, you can toggle between dark and light mode. when in random mode, you can select the image display duration directly above the photo.
+
+clicking on the arrows on the left and right sides of the photos lets you jump to the next set of four photos or to the next individual photo. clicking on any of the small square photos enlarges them.
 
 **photography by Martin Pollehn**
