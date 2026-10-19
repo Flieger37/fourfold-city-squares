@@ -18,6 +18,7 @@ const rawCityData = [
     ["george town", "cayman islands"],
     ["hamburg", "germany"],
     ["helsinki", "finland"],
+    ["innsbruck", "austria"],
     ["kotor", "montenegro"],
     ["las vegas", "usa"],
     ["london", "england"],
@@ -45,5 +46,6 @@ const rawCityData = [
     ["strasbourg", "france"],
     ["tallinn", "estonia"],
     ["the hague", "netherlands"],
-    ["valletta", "malta"]
+    ["valletta", "malta"],
+    ["zurich", "switzerland"]
 ];
