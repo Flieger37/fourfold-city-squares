@@ -17,7 +17,13 @@ the result is less a documentary record of a city than a visual impression of it
 
 ### how to navigate fourfold-city-squares
 
-you can access fourfold-city-squares via www.pollehn.de (clicking on the photo redirects you to my github page) or directly via https://flieger37.github.io/fourfold-city-squares/.
+you can access fourfold-city-squares via
+
+www.pollehn.de (clicking on the photo redirects you to my github page)
+
+or directly via
+
+https://flieger37.github.io/fourfold-city-squares/.
 
 in the top right corner, you can filter the selection by cities or countries, or select "home" to start displaying photos in random mode, which is also the default starting view of the page.
 
