@@ -12,6 +12,8 @@ the discipline lies in the limitation. where a conventional photo essay might sp
 
 the result is less a documentary record of a city than a visual impression of it — a studied reduction, somewhere between street photography and minimalist visual art. the grid becomes a new composition in itself, the four images entering into dialogue across their shared borders.
 
+
 ![fourfold city squares conzept](concept.jpg)
+
 
 **photography by Martin Pollehn**
