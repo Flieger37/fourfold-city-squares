@@ -10,6 +10,7 @@ const rawCityData = [
     ["calico", "usa"],
     ["cartagena", "colombia"],
     ["colon", "panama"],
+    ["concept", "photography"],
     ["copenhagen", "denmark"],
     ["corfu town", "greece"],
     ["fort-de-france", "martinique"],
