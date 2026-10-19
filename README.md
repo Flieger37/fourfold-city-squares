@@ -1,5 +1,5 @@
 # fourfold-city-squares
-city tours in four km&sup2; pictures
+city tours in four&sup2; pictures
 
 a photographic art project exploring the tension between constraint and composition. each city is distilled into exactly four images — no more, no less — arranged as a single square grid: four squares forming one square.
 
