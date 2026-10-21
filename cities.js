@@ -48,6 +48,7 @@ const rawCityData = [
     ["strasbourg", "france"],
     ["tallinn", "estonia"],
     ["the hague", "netherlands"],
+    ["toronto", "canada"],
     ["valletta", "malta"],
     ["zurich", "switzerland"]
 ];
