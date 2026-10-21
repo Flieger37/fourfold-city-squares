@@ -14,6 +14,7 @@ const rawCityData = [
     ["copenhagen", "denmark"],
     ["corfu town", "greece"],
     ["fort-de-france", "martinique"],
+    ["funchal", "portugal"],
     ["gdansk", "poland"],
     ["genova", "italy"],
     ["george town", "cayman islands"],
